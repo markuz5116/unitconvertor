@@ -1,7 +1,7 @@
 package com.beginner.unitconvertor.dataTypes;
 
 public enum WeightType {
-  MILLIGRAM(Math.pow(1.0, -6)), GRAM(0.001), KILOGRAM(1.0), OUNCE(0.0283495231), POUND(0.45359237);
+  MILLIGRAM(0.001), GRAM(1.0), KILOGRAM(1000.0), OUNCE(28.3495), POUND(453.592);
 
   public final Double conversionAmount;
 
