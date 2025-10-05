@@ -29,7 +29,7 @@ public class TemperatureConvertorService implements UnitConvertorService {
         return amount - toTemperatureType.conersionConstant;
 
       case FAHRENHEIT:
-        return (9 / 5) * amount - toTemperatureType.conersionConstant;
+        return (9.0 / 5.0) * amount - toTemperatureType.conersionConstant;
 
       case KELVIN:
       default:
@@ -44,7 +44,7 @@ public class TemperatureConvertorService implements UnitConvertorService {
         return amount + fromTemperatureType.conersionConstant;
 
       case FAHRENHEIT:
-        return (5 / 9) * (amount + fromTemperatureType.conersionConstant);
+        return (5.0 / 9.0) * (amount + fromTemperatureType.conersionConstant);
 
       case KELVIN:
       default:
