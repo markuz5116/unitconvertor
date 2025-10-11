@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.beginner.unitconvertor.dataTypes.UnitAndSymbol;
 import com.beginner.unitconvertor.dataTypes.WeightType;
 
 @Service
@@ -34,10 +35,10 @@ public class WeightConvertorService implements UnitConvertorService {
   }
 
   @Override
-  public List<String> getUnits() {
-    List<String> units = new ArrayList<>();
+  public List<UnitAndSymbol> getUnits() {
+    List<UnitAndSymbol> units = new ArrayList<>();
     for (WeightType weightType : WeightType.values()) {
-      units.add(weightType.name().toLowerCase());
+      units.add(new UnitAndSymbol(weightType.name().toLowerCase(), weightType.symbol));
     }
     return units;
   }

@@ -1,6 +1,7 @@
 import { Component, inject, input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Converter } from '../converter';
+import { Converter } from '../services/converter';
+import { UnitAndSymbol } from '../data-models/UnitAndSymbol';
 
 @Component({
   selector: 'app-unit-converter-form',
@@ -11,8 +12,8 @@ import { Converter } from '../converter';
 export class UnitConverterForm {
   private converter = inject(Converter);
   measurementType = input<string>("");
-  fromUnits: string[] = [];
-  toUnits: string[] = [];
+  fromUnits: UnitAndSymbol[] = [];
+  toUnits: UnitAndSymbol[] = [];
 
   showResultPage = false;
   convertedAmount = 0;
@@ -41,7 +42,7 @@ export class UnitConverterForm {
     if (amount == null || fromUnit == null || toUnit == null) {
       throw new Error("Input cannot be null")
     }
-    this.converter.convert(this.measurementType(), fromUnit, toUnit, amount).subscribe({
+    this.converter.convert(this.measurementType(), fromUnit.unit, toUnit.unit, amount).subscribe({
       next: convertedAmount => {
         this.convertedAmount = convertedAmount;
         this.showResultPage = true;

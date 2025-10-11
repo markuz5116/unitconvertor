@@ -7,8 +7,8 @@
   <label for="fromUnit" class="labelInputGroup">
     <p class="label">Unit to convert from</p>
     <select class="input selectInput" formControlName="fromUnit">
-      @for (fromUnit of fromUnits; track fromUnit) {
-      <option [ngValue]="fromUnit">{{fromUnit}}</option>
+      @for (fromUnit of fromUnits; track fromUnit.unit) {
+      <option [ngValue]="fromUnit">{{fromUnit.unit}} ({{fromUnit.symbol}})</option>
       }
     </select>
   </label>
@@ -16,8 +16,8 @@
   <label for="toUnit" class="labelInputGroup">
     <p class="label">Unit to convert to</p>
     <select class="input selectInput" formControlName="toUnit">
-      @for (toUnit of toUnits; track toUnit) {
-      <option [ngValue]="toUnit">{{toUnit}}</option>
+      @for (toUnit of toUnits; track toUnit.unit) {
+      <option [ngValue]="toUnit">{{toUnit.unit}} ({{toUnit.symbol}})</option>
       }
     </select>
   </label>
@@ -30,7 +30,8 @@
 
 <div id="resultPage" class="labelInputGroup {{!showResultPage ? 'hide' : ''}}">
   <h2>Result of your calculation</h2>
-  <p class="result">{{this.convertForm.value.amount}} {{this.convertForm.value.fromUnit}} = {{this.convertedAmount}}
-    {{this.convertForm.value.toUnit}}</p>
+  <p class="result">{{this.convertForm.value.amount}} {{this.convertForm.value.fromUnit?.symbol}} =
+    {{this.convertedAmount}}
+    {{this.convertForm.value.toUnit?.symbol}}</p>
   <button class="button" (click)="resetPage()">Reset</button>
 </div>

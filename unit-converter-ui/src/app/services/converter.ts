@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { UnitAndSymbol } from '../data-models/UnitAndSymbol';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class Converter {
   readonly BASE_URL = "http://localhost:8080";
 
   getAllUnits(measurementType: string) {
-    return this.httpClient.get<string[]>(`${this.BASE_URL}/units/${measurementType}`)
+    return this.httpClient.get<UnitAndSymbol[]>(`${this.BASE_URL}/units/${measurementType}`)
   }
 
   convert(measurementType: string, fromUnit: string, toUnit: string, amount: number) {

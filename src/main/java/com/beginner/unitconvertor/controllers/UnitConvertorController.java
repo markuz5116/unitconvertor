@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.beginner.unitconvertor.dataTypes.MeasurementType;
+import com.beginner.unitconvertor.dataTypes.UnitAndSymbol;
 import com.beginner.unitconvertor.services.LengthConvertorService;
 import com.beginner.unitconvertor.services.TemperatureConvertorService;
 import com.beginner.unitconvertor.services.UnitConvertorService;
@@ -38,7 +39,7 @@ public class UnitConvertorController {
   }
 
   @GetMapping("/units/{measurementType}")
-  List<String> getUnits(@PathVariable String measurementType) {
+  List<UnitAndSymbol> getUnits(@PathVariable String measurementType) {
     MeasurementType measurementTypeEnum = getMeasurementTypeEnum(measurementType);
     UnitConvertorService serviceToUse = getServiceToUse(measurementType, measurementTypeEnum);
     return serviceToUse.getUnits();

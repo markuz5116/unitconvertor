@@ -1,12 +1,12 @@
 package com.beginner.unitconvertor.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.beginner.unitconvertor.dataTypes.LengthType;
+import com.beginner.unitconvertor.dataTypes.UnitAndSymbol;
 
 @Service
 public class LengthConvertorService implements UnitConvertorService {
@@ -35,11 +35,11 @@ public class LengthConvertorService implements UnitConvertorService {
   }
 
   @Override
-  public List<String> getUnits() {
-    List<String> units = new ArrayList<>();
+  public List<UnitAndSymbol> getUnits() {
+    List<UnitAndSymbol> units = new ArrayList<>();
     for (LengthType lengthType : LengthType.values()) {
       String lengthTypeName = lengthType.name().toLowerCase();
-      units.add(lengthTypeName);
+      units.add(new UnitAndSymbol(lengthTypeName, lengthType.symbol));
     }
     return units;
   }

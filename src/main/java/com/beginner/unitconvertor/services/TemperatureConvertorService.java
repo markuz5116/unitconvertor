@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.beginner.unitconvertor.dataTypes.TemperatureType;
+import com.beginner.unitconvertor.dataTypes.UnitAndSymbol;
 
 @Service
 public class TemperatureConvertorService implements UnitConvertorService {
@@ -57,10 +58,10 @@ public class TemperatureConvertorService implements UnitConvertorService {
   }
 
   @Override
-  public List<String> getUnits() {
-    List<String> units = new ArrayList<>();
+  public List<UnitAndSymbol> getUnits() {
+    List<UnitAndSymbol> units = new ArrayList<>();
     for (TemperatureType temperatureType : TemperatureType.values()) {
-      units.add(temperatureType.name().toLowerCase());
+      units.add(new UnitAndSymbol(temperatureType.name().toLowerCase(), temperatureType.symbol));
     }
     return units;
   }
