@@ -1,0 +1,29 @@
+<form [formGroup]="convertForm" class="labelInputGroup" (ngSubmit)="convert()">
+  <label for="amount" class="labelInputGroup">
+    <p class="label">Enter the {{measurementType().toLowerCase()}} to convert</p>
+    <input id="amount" class="input" type="number" formControlName="amount">
+  </label>
+
+  <label for="fromUnit" class="labelInputGroup">
+    <p class="label">Unit to convert from</p>
+    <select class="input selectInput" formControlName="fromUnit">
+      @for (fromUnit of fromUnits; track fromUnit) {
+      <option [ngValue]="fromUnit">{{fromUnit}}</option>
+      }
+    </select>
+  </label>
+
+  <label for="toUnit" class="labelInputGroup">
+    <p class="label">Unit to convert to</p>
+    <select class="input selectInput" formControlName="toUnit">
+      @for (toUnit of toUnits; track toUnit) {
+      <option [ngValue]="toUnit">{{toUnit}}</option>
+      }
+    </select>
+  </label>
+
+  <hr>
+  <button class="button" type="submit" [disabled]="!convertForm.valid">
+    Convert
+  </button>
+</form>

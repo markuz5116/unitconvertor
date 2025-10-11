@@ -1,0 +1,23 @@
+<h1>Unit Converter</h1>
+
+<div class="measurementTypeOptions">
+  @for (measurementType of measurementTypes; track measurementType) {
+  @if (selectedMeasurementType == measurementType) {
+  <button class="measurementTypeOption selectedMeasurementType" id="{{measurementType}}Button"
+    value="{{measurementType}}" (click)="updateSelectedMeasurementType($event)">{{measurementType}}</button>
+  } @else {
+  <button class="measurementTypeOption" id="{{measurementType}}Button" value="{{measurementType}}"
+    (click)="updateSelectedMeasurementType($event)">{{measurementType}}</button>
+  }
+  }
+</div>
+<hr style="border: 0px;">
+<div class="unitConverterForms">
+  @for(measurementType of measurementTypes; track measurementType) {
+  @if (selectedMeasurementType == measurementType) {
+  <app-unit-converter-form measurementType="{{measurementType}}"></app-unit-converter-form>
+  } @else {
+  <app-unit-converter-form style="display: none;" measurementType="{{measurementType}}"></app-unit-converter-form>
+  }
+  }
+</div>

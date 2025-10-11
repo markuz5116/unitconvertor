@@ -1,0 +1,21 @@
+.measurementTypeOptions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.measurementTypeOption {
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: large;
+}
+
+.measurementTypeOption:hover {
+  cursor: pointer;
+}
+
+.selectedMeasurementType {
+  color: cornflowerblue;
+  text-decoration-line: underline;
+}
