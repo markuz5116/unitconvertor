@@ -1,5 +1,7 @@
 package com.beginner.unitconvertor.services;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -14,4 +16,6 @@ class UnknownUnitTypeException extends IllegalArgumentException {
 
 public interface UnitConvertorService {
   public Double getConvertedAmount(String fromType, String toType, Double amount);
+
+  public List<String> getUnits();
 }

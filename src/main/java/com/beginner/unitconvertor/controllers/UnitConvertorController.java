@@ -1,5 +1,7 @@
 package com.beginner.unitconvertor.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,16 +37,22 @@ public class UnitConvertorController {
     this.weightConvertorService = weightConvertorService;
   }
 
+  @GetMapping("/units/{measurementType}")
+  List<String> getUnits(@PathVariable String measurementType) {
+    MeasurementType measurementTypeEnum = getMeasurementTypeEnum(measurementType);
+    UnitConvertorService serviceToUse = getServiceToUse(measurementType, measurementTypeEnum);
+    return serviceToUse.getUnits();
+  }
+
   @GetMapping("/{measurementType}")
   Double getConvertedMeasurement(@PathVariable String measurementType, @RequestParam String fromType,
       @RequestParam String toType, @RequestParam Double amount) {
-    MeasurementType measurementTypeEnum = null;
-    try {
-      measurementTypeEnum = MeasurementType.valueOf(measurementType.toUpperCase());
-    } catch (IllegalArgumentException e) {
-      throw new UnknownMeasurementTypeException(measurementType);
-    }
+    MeasurementType measurementTypeEnum = getMeasurementTypeEnum(measurementType);
+    UnitConvertorService serviceToUse = getServiceToUse(measurementType, measurementTypeEnum);
+    return serviceToUse.getConvertedAmount(fromType, toType, amount);
+  }
 
+  private UnitConvertorService getServiceToUse(String measurementType, MeasurementType measurementTypeEnum) {
     UnitConvertorService serviceToUse = null;
     switch (measurementTypeEnum) {
       case LENGTH:
@@ -60,6 +68,16 @@ public class UnitConvertorController {
       default:
         throw new UnknownMeasurementTypeException(measurementType);
     }
-    return serviceToUse.getConvertedAmount(fromType, toType, amount);
+    return serviceToUse;
+  }
+
+  private MeasurementType getMeasurementTypeEnum(String measurementType) {
+    MeasurementType measurementTypeEnum = null;
+    try {
+      measurementTypeEnum = MeasurementType.valueOf(measurementType.toUpperCase());
+    } catch (IllegalArgumentException e) {
+      throw new UnknownMeasurementTypeException(measurementType);
+    }
+    return measurementTypeEnum;
   }
 }

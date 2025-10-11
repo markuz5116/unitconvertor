@@ -1,5 +1,8 @@
 package com.beginner.unitconvertor.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.beginner.unitconvertor.dataTypes.TemperatureType;
@@ -53,4 +56,12 @@ public class TemperatureConvertorService implements UnitConvertorService {
     return amount;
   }
 
+  @Override
+  public List<String> getUnits() {
+    List<String> units = new ArrayList<>();
+    for (TemperatureType temperatureType : TemperatureType.values()) {
+      units.add(temperatureType.name().toLowerCase());
+    }
+    return units;
+  }
 }

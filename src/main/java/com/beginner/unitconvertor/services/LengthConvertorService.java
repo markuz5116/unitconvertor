@@ -1,5 +1,9 @@
 package com.beginner.unitconvertor.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.beginner.unitconvertor.dataTypes.LengthType;
@@ -28,5 +32,15 @@ public class LengthConvertorService implements UnitConvertorService {
       return amount * lengthType.conversionAmountToBase;
     }
     return amount / lengthType.conversionAmountToBase;
+  }
+
+  @Override
+  public List<String> getUnits() {
+    List<String> units = new ArrayList<>();
+    for (LengthType lengthType : LengthType.values()) {
+      String lengthTypeName = lengthType.name().toLowerCase();
+      units.add(lengthTypeName);
+    }
+    return units;
   }
 }
