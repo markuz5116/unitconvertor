@@ -11,8 +11,8 @@ import { Converter } from '../converter';
 export class UnitConverterForm {
   private converter = inject(Converter);
   measurementType = input<string>("");
-  fromUnits = this.converter.getFromUnits(this.measurementType());
-  toUnits = this.converter.getToUnits(this.measurementType());
+  fromUnits: string[] = [];
+  toUnits: string[] = [];
 
   showResultPage = false;
   convertedAmount = 0;
@@ -20,7 +20,19 @@ export class UnitConverterForm {
     amount: new FormControl(0, Validators.required),
     fromUnit: new FormControl(this.fromUnits[0], Validators.required),
     toUnit: new FormControl(this.toUnits[0], Validators.required)
-  })
+  });
+
+  ngOnInit() {
+    this.converter.getAllUnits(this.measurementType()).subscribe({
+      next: units => {
+        this.toUnits = units;
+        this.fromUnits = units;
+      },
+      error: err => {
+        console.error(err);
+      }
+    })
+  }
 
   convert() {
     const amount = this.convertForm.value.amount;

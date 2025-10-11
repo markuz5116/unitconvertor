@@ -6,18 +6,15 @@ import { inject, Injectable } from '@angular/core';
 })
 export class Converter {
   private httpClient = inject(HttpClient);
+  readonly BASE_URL = "http://localhost:8080";
 
-  getFromUnits(measurementType: string) {
-    return ['f1', 'f2', 'f3'];
-  }
-
-  getToUnits(measurementType: string) {
-    return ['t1', 't2', 't3'];
+  getAllUnits(measurementType: string) {
+    return this.httpClient.get<string[]>(`${this.BASE_URL}/units/${measurementType}`)
   }
 
   convert(measurementType: string, fromUnit: string, toUnit: string, amount: number) {
     // ?fromType=${fromUnit}&toType=${toUnit}&amount={${amount}
-    return this.httpClient.get<number>(`http://localhost:8080/${measurementType}`, {
+    return this.httpClient.get<number>(`${this.BASE_URL}/${measurementType}`, {
       params: {
         'fromType': fromUnit,
         'toType': toUnit,
