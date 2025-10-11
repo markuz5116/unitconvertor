@@ -29,8 +29,16 @@ export class UnitConverterForm {
     if (amount == null || fromUnit == null || toUnit == null) {
       throw new Error("Input cannot be null")
     }
-    this.convertedAmount = this.converter.convert(this.measurementType(), fromUnit, toUnit, amount)
-    this.showResultPage = true;
+    this.converter.convert(this.measurementType(), fromUnit, toUnit, amount).subscribe({
+      next: convertedAmount => {
+        this.convertedAmount = convertedAmount;
+        this.showResultPage = true;
+      },
+      error: err => {
+        console.error(err);
+        // TODO add error handling
+      },
+    });
   }
 
   resetPage() {
