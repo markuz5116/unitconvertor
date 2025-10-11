@@ -1,4 +1,4 @@
-<form [formGroup]="convertForm" class="labelInputGroup" (ngSubmit)="convert()">
+<form [formGroup]="convertForm" class="labelInputGroup {{showResultPage ? 'hide' : ''}}" (ngSubmit)="convert()">
   <label for="amount" class="labelInputGroup">
     <p class="label">Enter the {{measurementType().toLowerCase()}} to convert</p>
     <input id="amount" class="input" type="number" formControlName="amount">
@@ -27,3 +27,10 @@
     Convert
   </button>
 </form>
+
+<div id="resultPage" class="labelInputGroup {{!showResultPage ? 'hide' : ''}}">
+  <h2>Result of your calculation</h2>
+  <p class="result">{{this.convertForm.value.amount}} {{this.convertForm.value.fromUnit}} = {{this.convertedAmount}}
+    {{this.convertForm.value.toUnit}}</p>
+  <button class="button" (click)="resetPage()">Reset</button>
+</div>

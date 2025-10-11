@@ -10,12 +10,12 @@ import { Converter } from '../converter';
 })
 export class UnitConverterForm {
   private converter = inject(Converter);
-
   measurementType = input<string>("");
   fromUnits = this.converter.getFromUnits(this.measurementType());
   toUnits = this.converter.getToUnits(this.measurementType());
 
-
+  showResultPage = false;
+  convertedAmount = 0;
   convertForm = new FormGroup({
     amount: new FormControl(0, Validators.required),
     fromUnit: new FormControl(this.fromUnits[0], Validators.required),
@@ -29,7 +29,13 @@ export class UnitConverterForm {
     if (amount == null || fromUnit == null || toUnit == null) {
       throw new Error("Input cannot be null")
     }
-    const convertedAmount = this.converter.convert(this.measurementType(), fromUnit, toUnit, amount)
-    console.log(convertedAmount);
+    this.convertedAmount = this.converter.convert(this.measurementType(), fromUnit, toUnit, amount)
+    this.showResultPage = true;
+  }
+
+  resetPage() {
+    this.convertForm.reset();
+    this.convertedAmount = 0;
+    this.showResultPage = false;
   }
 }

@@ -35,7 +35,17 @@
   border-radius: 5px;
 }
 
-.button:hover {
+.button:hover:enabled {
   cursor: pointer;
   background-color: lightgrey;
+}
+
+.hide {
+  display: none;
+}
+
+.result {
+  font-size: xx-large;
+  font-weight: bold;
+  margin-top: 0px;
 }

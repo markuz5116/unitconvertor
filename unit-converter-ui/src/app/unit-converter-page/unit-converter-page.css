@@ -19,3 +19,7 @@
   color: cornflowerblue;
   text-decoration-line: underline;
 }
+
+.hide {
+  display: none;
+}
